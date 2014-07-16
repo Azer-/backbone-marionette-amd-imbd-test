@@ -23,7 +23,7 @@ function (Marionette, Backbone, FingerBlast, NavController, Router) {
     });
 
     app.addInitializer(function () {
-      if (window.ontouchstart === undefined) {
+      if (undefined === window.ontouchstart) {
         fingerBlast = new FingerBlast(document.body);
       }
     });

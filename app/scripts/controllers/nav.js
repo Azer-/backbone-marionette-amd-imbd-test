@@ -1,7 +1,8 @@
 define([
   'marionette',
   'views/main',
-  'views/about'
+  'views/about',
+  'collections/movies',
 ],
 
 function (Marionette, MainView, AboutView) {
@@ -13,7 +14,7 @@ function (Marionette, MainView, AboutView) {
     },
 
     home: function () {
-      this.region.show(new MainView());
+      var main = this.region.show(new MainView());
     },
 
     about: function () {

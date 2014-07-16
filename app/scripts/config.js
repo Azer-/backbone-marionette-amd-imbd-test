@@ -24,7 +24,7 @@ require.config({
     underscore: '../bower_components/underscore/underscore',
     'handlebars.runtime': '../bower_components/handlebars/handlebars.runtime.amd',
     handlebars: 'vendor/handlebars',
-    marionette: '../bower_components/backbone.marionette/lib/core/amd/backbone.marionette',
+    marionette: '../bower_components/marionette/lib/backbone.marionette',
     'backbone.babysitter': '../bower_components/backbone.babysitter/lib/backbone.babysitter',
     'backbone.wreqr': '../bower_components/backbone.wreqr/lib/backbone.wreqr',
     syphon: '../bower_components/backbone.syphon/lib/amd/backbone.syphon',
@@ -48,7 +48,7 @@ require.config({
         var parts = window.location.search.match(/([^?=&]+)(=([^&]*))?/g);
         for (var i in parts) {
           var tokens = parts[i].split('=');
-          if (tokens[0] === 'lang') {
+          if ('lang' === tokens[0]) {
             locale = tokens[1];
             return locale;
           }
