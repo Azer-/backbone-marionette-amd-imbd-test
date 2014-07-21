@@ -1,47 +1,32 @@
 define([
   'backbone',
-  'models/Movie',
-  'superagent'
+  'models/Movie'
 ],
 
-function(Backbone, Movie, superagent) {
+function(Backbone, Movie) {
   'use strict';
 
   var MoviesCollection = Backbone.Collection.extend({
-    url: "http://sg.media-imdb.com/suggests/{letter}/{word}.json",
     model: Movie,
-
-    initialize: function() {
-      // flags whether the collection is currently in the process of fetching
-      // more results from the API (to avoid multiple simultaneous calls
-      this.loading = false;
-      lconsole.log('COUCOU MoviesCollection');
-
+    term: '',
+    url: function () {
+      console.log('URL ?');
+      var term = this.term;
+      return 'http://sg.media-imdb.com/suggests/' + term[0] + '/' + term + '.json';
     },
-
     search: function(searchTerm) {
-      this.fetchMovies(searchTerm, function(books) {
-        console.log("found books : " + books);
+      this.term = encodeURI(searchTerm.toLowerCase());
+      this.fetch({
+        dataType: 'jsonp',
+        jsonp: false,
+        jsonpCallback: 'imdb$' + searchTerm,
+        reset: true
       });
     },
-
-    fetchBooks: function(searchTerm, callback) {
-      if (this.loading) return true;
-
-      this.loading = true;
-
-      var self = this;
-
-      var query = this.url;
-
-      superagent.get({
-        url: query,
-        dataType: 'jsonp'
-      })
-      .end( function(res) {
-          console.log('Search !', res)
-      });
+    parse: function(response) {
+      return response.d;
     }
+
   });
 
   // HryHomeworks.Collections.MoviesCollection = MoviesCollection;

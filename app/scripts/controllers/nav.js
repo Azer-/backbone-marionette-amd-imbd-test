@@ -1,11 +1,11 @@
 define([
   'marionette',
   'views/main',
-  'views/about',
-  'collections/movies',
+  'views/movie',
+  'views/sitemap'
 ],
 
-function (Marionette, MainView, AboutView) {
+function (Marionette, MainView, MovieView, AboutView) {
   'use strict';
 
   var NavController = Marionette.Controller.extend({
@@ -13,12 +13,16 @@ function (Marionette, MainView, AboutView) {
       this.region = options.region;
     },
 
-    home: function () {
-      var main = this.region.show(new MainView());
+    movies: function () {
+      this.region.show(new MainView());
     },
 
-    about: function () {
-      this.region.show(new AboutView());
+    sitemap: function () {
+      this.region.show(AboutView);
+    },
+
+    showMovie: function (id) {
+      this.region.show(new MovieView({model:{id: id}}));
     }
   });
 

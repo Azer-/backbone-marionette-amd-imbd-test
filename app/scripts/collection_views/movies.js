@@ -3,27 +3,37 @@ define([
   'underscore',
   'lib/eventaggregator',
   'collections/movies',
+  'item_views/movie'
 ],
 
-function(Marionette, _, vent, MovieCollection) {
+function(Marionette, _, vent, MovieCollection, MovieItemView) {
   'use strict';
 
   var MoviesView = Marionette.CollectionView.extend({
     // emptyView: LoadingMessageView,
-    // itemView: ItemView,
+    childView: MovieItemView,
     model: MovieCollection,
+    tagName: 'ul',
+    className: 'movie-list',
     events: {
       'search:term': 'search'
     },
-    search: function(term) {
-      console.log("Hey, Ima search for " + term);
-    },
     initialize: function() {
-      _.bindAll(this, "search");
-      vent.on("search:term", this.search);
+      this.collection = new MovieCollection();
+      _.bindAll(this, 'search');
+      vent.on('search:term', this.search);
+    },
+    onShow: function() {
+      this.searchMadMax();
+    },
+    searchMadMax: function() {
+      this.search('mad_max');
+    },
+    search: function(term) {
+      console.log('Hey, Ima search for ' + term);
+      this.collection.search(term);
     }
-
-  })
+  });
 
   return MoviesView;
 });

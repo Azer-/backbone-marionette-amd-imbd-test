@@ -11,12 +11,10 @@ function (Marionette, templates, MoviesCollectionView, SearchFormView) {
 
   return Marionette.LayoutView.extend({
     template: templates.main,
-
     regions: {
-      form: ".form",
-      content: "#content",
+      content: '#content',
+      form: '.form',
     },
-
     render: function () {
       this.$el.html(this.template());
       this.form.show(new SearchFormView());

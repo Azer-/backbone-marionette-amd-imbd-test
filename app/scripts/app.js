@@ -1,15 +1,15 @@
 define([
   'marionette',
   'backbone',
-  'fingerblast',
+  // 'fingerblast',
   'controllers/nav',
   'routers/router'
 ],
 
-function (Marionette, Backbone, FingerBlast, NavController, Router) {
+function (Marionette, Backbone, NavController, Router) {
   'use strict';
 
-  var fingerBlast;
+  // var fingerBlast;
 
   return function (options) {
     var app = new Marionette.Application();
@@ -22,11 +22,11 @@ function (Marionette, Backbone, FingerBlast, NavController, Router) {
       });
     });
 
-    app.addInitializer(function () {
-      if (undefined === window.ontouchstart) {
-        fingerBlast = new FingerBlast(document.body);
-      }
-    });
+    // app.addInitializer(function () {
+    //   if (undefined === window.ontouchstart) {
+    //     fingerBlast = new FingerBlast(document.body);
+    //   }
+    // });
 
     app.addInitializer(function () {
       Backbone.history.start();

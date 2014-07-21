@@ -1,0 +1,13 @@
+    nodes:
+        -   name: 'movies'
+            path: ''
+        -
+            name: 'sitemap'
+            path: 'sitemap'
+        -   name: 'showMovie'
+            path: 'movies/:id'
+            nodes:
+                    -   name: 'madMax'
+                        path: 'movies/tt0079501'
+                    -   name: 'madMax2'
+                        path: 'movies/tt0082694'
